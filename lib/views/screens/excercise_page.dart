@@ -1,6 +1,7 @@
 import 'package:exam1_app/controller/excercise_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:readmore/readmore.dart';
 
 import '../../modal/exercise_modal.dart';
 import '../../utils/color_utils.dart';
@@ -19,7 +20,7 @@ class ExcercisePage extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        backgroundColor: MyColor.theme1,
+        backgroundColor: MyColor.theme2,
         foregroundColor: Colors.white,
       ),
       body: Consumer<ExcerciseController>(builder: (context, provider, _) {
@@ -38,7 +39,7 @@ class ExcercisePage extends StatelessWidget {
                     ExcerciseModal temp = provider.allExcercise[index];
 
                     return Card(
-                      color: MyColor.theme1,
+                      color: MyColor.theme2,
                       child: ListTile(
                         title: Text(
                           temp.name,
@@ -48,7 +49,14 @@ class ExcercisePage extends StatelessWidget {
                           ),
                         ),
                         leading: CircleAvatar(
-                          child: Text("${index + 1}"),
+                          backgroundColor: Colors.white,
+                          child: Text(
+                            "${index + 1}",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
                         ),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,19 +113,26 @@ class ExcercisePage extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            Text.rich(
-                              TextSpan(
-                                children: [
-                                  const TextSpan(
-                                    text: "Instruction: ",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                  TextSpan(text: temp.instructions),
-                                ],
+                            const Text(
+                              "Instructios:",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
+                            ReadMoreText(
+                              temp.instructions,
+                              trimLines: 3,
+                              textAlign: TextAlign.justify,
+                              trimMode: TrimMode.Line,
+                              trimCollapsedText: "Read More",
+                              trimExpandedText: "Read Less",
+                              lessStyle: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                              moreStyle: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
                           ],
                         ),
                       ),

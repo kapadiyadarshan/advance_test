@@ -8,13 +8,19 @@ class ExcerciseController extends ChangeNotifier {
 
   List<String> Muscles = [
     "abdominals",
-    "abductors",
     "calves",
     "biceps",
     "adductors",
     "chest",
     "forearms",
     "glutes",
+    "hamstrings",
+    "lats",
+    "lower_back",
+    "middle_back",
+    "neck",
+    "traps",
+    "triceps",
   ];
 
   List<String> Difficulty = [

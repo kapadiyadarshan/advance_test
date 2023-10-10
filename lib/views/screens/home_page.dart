@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: Consumer<ExcerciseController>(builder: (context, provider, _) {
-          return ListView.builder(
+          return GridView.builder(
             itemCount: provider.Muscles.length,
             itemBuilder: (context, index) {
               return GestureDetector(
@@ -38,9 +38,10 @@ class HomePage extends StatelessWidget {
                   );
                 },
                 child: Container(
-                  height: 100,
+                  height: 200,
                   width: double.infinity,
-                  margin: const EdgeInsets.all(5),
+                  // margin: const EdgeInsets.all(5),
+                  padding: EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
@@ -53,17 +54,40 @@ class HomePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   alignment: Alignment.center,
-                  child: Text(
-                    provider.Muscles[index],
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 140,
+                        width: 160,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                              "asset/images/${provider.Muscles[index]}.png",
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        provider.Muscles[index],
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               );
             },
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisExtent: 240,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+            ),
           );
         }),
       ),
